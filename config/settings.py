@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url 
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,7 +96,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://event_management_znni_user:ipR6e4CkUcJ7qj6PMrqrTpTiKsoCiNhE@dpg-d1mkqg3e5dus73arkj4g-a.singapore-postgres.render.com/event_management_znni',
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600
     )
 }
