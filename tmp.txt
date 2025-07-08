@@ -1,0 +1,69 @@
+from django.urls import path, include
+from Admin.views import admin_dashboard
+
+app_name="admin"
+
+urlpatterns = [
+    path("", admin_dashboard, name="dashboard")
+]
+
+from django.shortcuts import render
+
+# Create your views here.
+def admin_dashboard(request):
+    render(request,"dashboard.html")
+
+
+    
+{% extends 'main.html' %}
+{% block title %}Organizer Dashboard{% endblock %}
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Dashboard Overview</h1>
+
+{% comment %} <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <!-- Total Events -->
+  <div class="p-6 bg-white rounded shadow">
+    <h2 class="text-xl font-semibold">Total Events</h2>
+    <p class="text-4xl font-bold text-blue-600">{{ total_events }}</p>
+  </div>
+
+  <!-- Total Categories -->
+  <div class="p-6 bg-white rounded shadow">
+    <h2 class="text-xl font-semibold">Total Categories</h2>
+    <p class="text-4xl font-bold text-green-600">{{ total_categories }}</p>
+  </div>
+
+  <!-- Total Participants -->
+  <div class="p-6 bg-white rounded shadow">
+    <h2 class="text-xl font-semibold">Total Unique Participants</h2>
+    <p class="text-4xl font-bold text-purple-600">{{ total_participants }}</p>
+  </div>
+</div>
+
+<!-- Recent Events Table -->
+<div class="mt-10">
+  <h2 class="mb-4 text-2xl font-bold">Recent Events</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border rounded shadow">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left">Name</th>
+          <th class="px-4 py-2 text-left">Category</th>
+          <th class="px-4 py-2 text-left">Date</th>
+          <th class="px-4 py-2 text-left">Participants</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in recent_events %}
+        <tr class="border-t">
+          <td class="px-4 py-2">{{ event.name }}</td>
+          <td class="px-4 py-2">{{ event.category.name }}</td>
+          <td class="px-4 py-2">{{ event.date }}</td>
+          <td class="px-4 py-2">{{ event.participant_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div> {% endcomment %}
+{% endblock %}

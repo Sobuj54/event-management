@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Categories</h1>
+<a href="{% url 'category:create' %}" class="px-4 py-2 text-white bg-green-600 rounded">+ Add Category</a>
+<table class="w-full mt-4 bg-white rounded shadow-md">
+  <thead class="bg-gray-200">
+    <tr><th class="p-2">Name</th><th>Description</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+    <tr class="border-t">
+      <td class="p-2">{{ category.name }}</td>
+      <td class="p-2">{{ category.description }}</td>
+      <td class="p-2">
+        <a href="{% url 'category:update' category.pk %}" class="text-blue-600">Edit</a>
+        <a href="{% url 'category:delete' category.pk %}" class="text-red-600">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block title %}Update Category{% endblock %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-bold">Update Category</h1>
+<form method="POST" class="space-y-4">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="px-4 py-2 text-white bg-yellow-500 rounded">Update</button>
+</form>
+{% endblock %}

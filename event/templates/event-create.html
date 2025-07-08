@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block title %}Create Event{% endblock %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-bold">Create New Event</h1>
+<form method="POST" class="space-y-4">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded">Create</button>
+</form>
+{% endblock %}

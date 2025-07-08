@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block title %}Participants{% endblock %}
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Participants</h1>
+<a href="{% url 'participant:create' %}" class="px-4 py-2 text-white bg-green-600 rounded">+ Add Participant</a>
+<table class="w-full mt-4 bg-white rounded shadow-md">
+  <thead class="bg-gray-200">
+    <tr><th class="p-2">Name</th><th>Email</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for participant in participants %}
+    <tr class="border-t">
+      <td class="p-2">{{ participant.name }}</td>
+      <td class="p-2">{{ participant.email }}</td>
+      <td class="p-2">
+        <a href="{% url 'participant:update' participant.pk %}" class="text-blue-600">Edit</a>
+        <a href="{% url 'participant:delete' participant.pk %}" class="text-red-600">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
