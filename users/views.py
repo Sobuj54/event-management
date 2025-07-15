@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from users.forms import RegistrationForm, LoginForm
+from users.forms import RegistrationForm, LoginForm, CreateGroupForm
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.tokens import default_token_generator
@@ -52,3 +52,15 @@ def activate_user(request, user_id, token):
 
     except User.DoesNotExist:
         return HttpResponse("User doesn't exists.")
+    
+
+def create_group(request):
+    form = CreateGroupForm()
+
+    if request.method == "POST":
+        form = CreateGroupForm(request.POST)
+        if form.is_valid():
+            group = form.save()
+            messages.success(request, f"Group {group.name} created successfully.")
+            return redirect("users:create-group")
+    return render(request, "admin/create-group.html", {"form": form})

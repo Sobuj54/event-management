@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission, Group
 from participant.forms import ParticipantFormMixin
 import re
 from django.utils.translation import gettext_lazy as _
@@ -49,3 +49,16 @@ class LoginForm(ParticipantFormMixin, AuthenticationForm):
     class Meta:
         model = User
         fields = ["username", "password"]
+
+
+class CreateGroupForm(ParticipantFormMixin, forms.ModelForm):
+    permissions = forms.ModelMultipleChoiceField(
+        queryset=Permission.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Assign permissions"
+    )
+
+    class Meta:
+        model = Group
+        fields = ["name", "permissions"]
