@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from debug_toolbar.toolbar import debug_toolbar_urls
+from core.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,6 @@ urlpatterns = [
     path("event/", include("event.urls")),
     path("participant/", include("participant.urls")),
     path("category/", include("category.urls")),
-    path("Admin/", include("Admin.urls"))
+    path("Admin/", include("Admin.urls")),
+    path("", home, name="home")
 ]+ debug_toolbar_urls()

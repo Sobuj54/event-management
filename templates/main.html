@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Event Management{% endblock %}</title>
+  <title>{% block title %}EventSphere{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
 </head>
 <body class="text-gray-800 bg-gray-100">
   <nav class="p-4 text-white bg-blue-600">
     <div class="flex justify-between mx-auto max-w-7xl">
-      <div class="text-xl font-bold">Event Manager</div>
+      <div class="text-xl font-bold">EventSphere</div>
       <div class="space-x-4">
         <a href="{% url 'event:list' %}" class="hover:underline">Events</a>
         <a href="{% url 'participant:list' %}" class="hover:underline">Participants</a>
@@ -20,7 +20,8 @@
     </div>
   </nav>
   <main class="p-6 mx-auto max-w-7xl">
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
   </main>
   <script>
   // Make entire input area trigger native pickers for date/time fields
