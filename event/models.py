@@ -1,6 +1,7 @@
 from django.db import models
 from category.models import Category
 from participant.models import Participant
+from django.contrib.auth.models import User
 
 class Event(models.Model):
     name = models.CharField(max_length=100)
@@ -10,7 +11,8 @@ class Event(models.Model):
     location = models.CharField(max_length=100)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="events")
-    participants = models.ManyToManyField(Participant, related_name="participants", blank=True)
+    participants = models.ManyToManyField(User, related_name="events", blank=True)
+
 
     def __str__(self):
         return f"{self.name} on {self.date}"
