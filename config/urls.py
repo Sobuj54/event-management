@@ -26,5 +26,6 @@ urlpatterns = [
     path("participant/", include("participant.urls")),
     path("category/", include("category.urls")),
     path("Admin/", include("Admin.urls")),
-    path("", home, name="home")
+    path("", home, name="home"),
+    path("users/", include("users.urls"))
 ]+ debug_toolbar_urls()

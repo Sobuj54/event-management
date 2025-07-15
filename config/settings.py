@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django_browser_reload",
     "debug_toolbar",
     "core",
+    "users",
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
