@@ -7,3 +7,6 @@ def home(request):
     today = timezone.now()
     upcoming_events = Event.objects.filter(date__gt=today).order_by("date")
     return render(request, "home.html", {"upcoming_events": upcoming_events})
+
+def no_permission(request):
+    return render(request, "no-permission.html")

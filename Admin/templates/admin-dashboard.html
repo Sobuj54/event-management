@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Admin Dashboard</h1>
+
+ <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+
+  <!-- All groups -->
+ <a href="{% url 'Admin:all-groups' %}" class="hover:shadow-green-400 hover:shadow-lg">
+   <div class="p-6 bg-white rounded shadow">
+    <h2 class="text-xl font-semibold">All Groups</h2>
+  </div>
+ </a>
+
+  <!-- All Users -->
+ <a href="{% url 'Admin:all-users' %}" class="hover:shadow-green-400 hover:shadow-lg">
+   <div class="p-6 bg-white rounded shadow">
+    <h2 class="text-xl font-semibold">All Users</h2>
+  </div>
+ </a>
+</div>
+
+<!-- Recent Events Table -->
+<div class="mt-10">
+  {% block events %}{% endblock %}
+</div> 
+{% endblock %}

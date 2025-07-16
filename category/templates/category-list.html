@@ -1,8 +1,20 @@
-{% extends 'main.html' %}
+{% extends 'organizer-dashboard.html' %}
 {% block title %}Categories{% endblock %}
-{% block content %}
+{% block events %}
 <h1 class="mb-6 text-3xl font-bold">Categories</h1>
 <a href="{% url 'category:create' %}" class="px-4 py-2 text-white bg-green-600 rounded">+ Add Category</a>
+<div>
+     {% if messages %}
+    {% for message in messages %}
+      <div class="mb-4 px-4 py-3 rounded 
+        {% if message.tags == 'success' %}bg-green-100 text-green-800
+        {% elif message.tags == 'error' %}bg-red-100 text-red-800
+        {% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
 <table class="w-full mt-4 bg-white rounded shadow-md">
   <thead class="bg-gray-200">
     <tr><th class="p-2">Name</th><th>Description</th><th>Actions</th></tr>

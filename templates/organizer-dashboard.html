@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Organizer Dashboard</h1>
+
+ <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+  <!-- Total Events -->
+ 
+ <a href="{% url 'event:list' %}" class="hover:shadow-green-400 hover:shadow-lg">
+   <div class="p-6 bg-white rounded shadow ">
+    <h2 class="text-xl font-semibold">Events</h2>
+     <p class="text-4xl font-bold text-blue-600">{{ total_events }}</p> 
+  </div>
+ </a>
+ <a href="{% url 'category:list' %}" class="hover:shadow-green-400 hover:shadow-lg">
+   <div class="p-6 bg-white rounded shadow ">
+    <h2 class="text-xl font-semibold">Categories</h2>
+     <p class="text-4xl font-bold text-blue-600">{{ total_categories }}</p> 
+  </div>
+ </a>
+
+</div>
+
+<!-- Recent Events Table -->
+<div class="mt-10">
+  {% block events %}{% endblock %}
+</div> 
+{% endblock %}

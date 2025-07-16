@@ -7,6 +7,7 @@ from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
+
 def sign_up(request):
     form = RegistrationForm()
     
@@ -54,13 +55,4 @@ def activate_user(request, user_id, token):
         return HttpResponse("User doesn't exists.")
     
 
-def create_group(request):
-    form = CreateGroupForm()
 
-    if request.method == "POST":
-        form = CreateGroupForm(request.POST)
-        if form.is_valid():
-            group = form.save()
-            messages.success(request, f"Group {group.name} created successfully.")
-            return redirect("users:create-group")
-    return render(request, "admin/create-group.html", {"form": form})

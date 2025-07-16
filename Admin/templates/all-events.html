@@ -1,9 +1,8 @@
-{% extends 'organizer-dashboard.html' %}
+{% extends 'participant-dashboard.html' %}
 {% block title %}Event List{% endblock %}
 {% block events %}
 <h1 class="mb-6 text-3xl font-bold">Events</h1>
 <div class="flex justify-between">
-  <a href="{% url 'event:create' %}" class="px-4 py-2 text-white bg-green-600 rounded">+ Add Event</a>
   <form action="{% url 'event:list' %}" method="GET">
     <input
       type="text"
@@ -27,8 +26,18 @@
     <p class="mt-2">Category: {{ event.category.name }}</p>
     <p class="mt-1">Participants: {{ event.participants.count }}</p>
     <div class="mt-4 space-x-2">
-      <a href="{% url 'event:update' event.pk %}" class="text-blue-600">Edit</a>
-      <a href="{% url 'event:delete' event.pk %}" class="text-red-600">Delete</a>
+      <form method="post" action="{% url 'Admin:rsvp' event.id %}">
+            {% csrf_token %}
+            {% if user in event.participants.all %}
+                <button class="px-4 py-2 text-white bg-gray-400 rounded-lg cursor-not-allowed" disabled>
+                Already RSVP’d
+                </button>
+            {% else %}
+                <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">
+                RSVP
+                </button>
+            {% endif %}
+        </form>
     </div>
   </div>
   {% endfor %}

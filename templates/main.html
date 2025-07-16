@@ -10,13 +10,13 @@
 <body class="text-gray-800 bg-gray-100">
   <nav class="p-4 text-white bg-blue-600">
     <div class="flex justify-between mx-auto max-w-7xl">
-      <div class="text-xl font-bold">EventSphere</div>
+      <div class="text-xl font-bold">
+        <a href="{% url 'home' %}">EventSphere</a>
+      </div>
       <div class="space-x-4">
-        <a href="{% url 'event:list' %}" class="hover:underline">Events</a>
-        <a href="{% url 'participant:list' %}" class="hover:underline">Participants</a>
-        <a href="{% url 'category:list' %}" class="hover:underline">Categories</a>
-        <a href="{% url 'users:create-group' %}" class="hover:underline">Create group</a>
-        <a href="{% url 'Admin:home' %}?q=today" class="hover:underline">Admin</a>
+
+          <a href="{% url 'Admin:redirect-url' %}" class="hover:underline">Dashboard</a>
+      
       </div>
     </div>
   </nav>
