@@ -15,7 +15,7 @@ class EventFormMixin:
 class EventForm(EventFormMixin,forms.ModelForm):
     class Meta:
         model = Event
-        fields = "__all__"
+        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'image']
         widgets = {
             'date': forms.DateInput(attrs={
                 'type': 'date',

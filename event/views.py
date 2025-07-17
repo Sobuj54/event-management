@@ -3,6 +3,7 @@ from event.models import Event
 from event.forms import EventForm
 from django.contrib.auth.decorators import user_passes_test
 from category.models import Category
+from django.contrib import messages
 
 
 # List all events
@@ -37,9 +38,10 @@ def event_list(request):
 @user_passes_test(is_organizer)
 def event_create(request):
     if request.method == 'POST':
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Task created successfully.")
             return redirect('event:list')
     else:
         form = EventForm()

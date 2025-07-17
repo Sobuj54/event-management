@@ -1,7 +1,9 @@
 {% extends 'organizer-dashboard.html' %}
 {% block title %}Event List{% endblock %}
+
 {% block events %}
 <h1 class="mb-6 text-3xl font-bold">Events</h1>
+
 <div class="flex justify-between">
   <a href="{% url 'event:create' %}" class="px-4 py-2 text-white bg-green-600 rounded">+ Add Event</a>
   <form action="{% url 'event:list' %}" method="GET">
@@ -15,20 +17,42 @@
     <button
       type="submit"
       class="px-4 py-2 text-white bg-blue-600 rounded-r-md hover:bg-blue-700"
-    >    Search
-    </button>
+    >Search</button>
   </form>
 </div>
+
+<div>
+    {% if messages %}
+    {% for message in messages %}
+      <div class="mb-4 px-4 py-3 rounded 
+        {% if message.tags == 'success' %}bg-green-100 text-green-800
+        {% elif message.tags == 'error' %}bg-red-100 text-red-800
+        {% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
 <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-2 lg:grid-cols-3">
   {% for event in events %}
   <div class="p-4 bg-white rounded shadow">
+    
+    {% if event.image %}
+      <img src="{{ event.image.url }}" alt="{{ event.name }}" class="object-cover w-full h-40 mb-4 rounded">
+    {% else %}
+      <div class="flex items-center justify-center w-full h-40 mb-4 text-gray-400 bg-gray-100 rounded">
+        No image
+      </div>
+    {% endif %}
+    
     <h2 class="text-xl font-semibold">{{ event.name }}</h2>
     <p class="text-sm text-gray-500">{{ event.date }} {{ event.time }}</p>
     <p class="mt-2">Category: {{ event.category.name }}</p>
     <p class="mt-1">Participants: {{ event.participants.count }}</p>
     <div class="mt-4 space-x-2">
-      <a href="{% url 'event:update' event.pk %}" class="text-blue-600">Edit</a>
-      <a href="{% url 'event:delete' event.pk %}" class="text-red-600">Delete</a>
+      <a href="{% url 'event:update' event.pk %}" class="text-blue-600 hover:underline">Edit</a>
+      <a href="{% url 'event:delete' event.pk %}" class="text-red-600 hover:underline">Delete</a>
     </div>
   </div>
   {% endfor %}

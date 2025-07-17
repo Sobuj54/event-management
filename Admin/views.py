@@ -125,7 +125,7 @@ def rsvp_event(request, event_id):
             fail_silently=True,
         )
 
-    return redirect('Admin:participant-dashboard')
+    return redirect('Admin:rsvped-events')
     
 
 @login_required
