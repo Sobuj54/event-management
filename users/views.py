@@ -1,16 +1,31 @@
 from django.shortcuts import render, redirect, HttpResponse
-from users.forms import RegistrationForm, LoginForm, CreateGroupForm
+from users.forms import RegistrationForm, LoginForm, CreateGroupForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 User = get_user_model()
 
 # Create your views here.
+
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = ProfileUpdateForm
+    template_name = "accounts/edit-profile.html"
+    context_object_name = "form"
+
+    def get_object(self):
+        return self.request.user
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your profile has been updated successfully.")
+        return redirect("users:edit-profile")
+
 
 def sign_up(request):
     form = RegistrationForm()
@@ -70,6 +85,8 @@ class ProfileView(TemplateView):
         context["username"] = user.username
         context["email"] = user.email
         context["name"] = user.get_full_name()
+        context["profile_picture"] = user.profile_picture
+        context["phone_number"] = user.phone_number
         context["member_since"] = user.date_joined
         context["last_login"] = user.last_login
 

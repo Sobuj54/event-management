@@ -65,3 +65,10 @@ class CreateGroupForm(ParticipantFormMixin, forms.ModelForm):
     class Meta:
         model = Group
         fields = ["name", "permissions"]
+
+
+class ProfileUpdateForm(ParticipantFormMixin, forms.ModelForm):
+    class Meta: 
+        model = User
+        fields = ["email", "first_name", "last_name", "phone_number", "profile_picture"]
+
