@@ -3,7 +3,7 @@ from django.contrib.auth.models import  Permission, Group
 from participant.forms import ParticipantFormMixin
 import re
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -71,4 +71,8 @@ class ProfileUpdateForm(ParticipantFormMixin, forms.ModelForm):
     class Meta: 
         model = User
         fields = ["email", "first_name", "last_name", "phone_number", "profile_picture"]
+
+
+class CustomPasswordChangeForm(ParticipantFormMixin, PasswordChangeForm):
+    pass
 

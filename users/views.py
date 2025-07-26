@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from users.forms import RegistrationForm, LoginForm, CreateGroupForm, ProfileUpdateForm
+from users.forms import RegistrationForm, LoginForm, CreateGroupForm, ProfileUpdateForm, CustomPasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import default_token_generator
@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -25,6 +27,12 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         form.save()
         messages.success(self.request, "Your profile has been updated successfully.")
         return redirect("users:edit-profile")
+    
+class ChangePassword(LoginRequiredMixin, PasswordChangeView):
+    template_name = "accounts/password-change.html"
+    success_url = reverse_lazy("users:password-change-done")
+    form_class = CustomPasswordChangeForm
+
 
 
 def sign_up(request):
