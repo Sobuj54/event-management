@@ -105,9 +105,13 @@ def activate_user(request, user_id, token):
         return HttpResponse("User doesn't exists.")
     
 
-@method_decorator(login_required, name="dispatch")
 class ProfileView(TemplateView):
     template_name = "accounts/profile.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("no-permission")  # your custom URL name
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
