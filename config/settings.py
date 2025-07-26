@@ -88,24 +88,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'event_management',
-        'USER': 'postgres',
-        'PASSWORD': '76285',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default=config('DATABASE_URL'),
-#         conn_max_age=600
-#     )
+#      'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'event_management',
+#         'USER': 'postgres',
+#         'PASSWORD': '76285',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default=config('DATABASE_URL'),
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
@@ -169,5 +169,5 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
-# FRONTEND_URL = "https://event-management-r3p2.onrender.com"
-FRONTEND_URL = "http://127.0.0.1:8000"
+FRONTEND_URL = "https://event-management-r3p2.onrender.com"
+# FRONTEND_URL = "http://127.0.0.1:8000"

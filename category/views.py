@@ -3,6 +3,8 @@ from .models import Category
 from .forms import CategoryForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
+from django.views.generic import ListView
+from django.utils.decorators import method_decorator
 
 
 def is_organizer(user):
@@ -12,6 +14,14 @@ def is_organizer(user):
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'category-list.html', {'categories': categories})
+
+
+@method_decorator(user_passes_test(is_organizer), name='dispatch')
+class CategoryListView(ListView):
+    model = Category
+    template_name = "category-list.html"
+    context_object_name = "categories"
+
 
 # Create a new category
 @user_passes_test(is_organizer)
