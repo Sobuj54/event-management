@@ -10,6 +10,7 @@ from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
 User = get_user_model()
 
@@ -104,7 +105,7 @@ def activate_user(request, user_id, token):
         return HttpResponse("User doesn't exists.")
     
 
-
+@method_decorator(login_required, name="dispatch")
 class ProfileView(TemplateView):
     template_name = "accounts/profile.html"
 
