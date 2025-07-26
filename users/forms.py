@@ -1,9 +1,12 @@
 from django import forms
-from django.contrib.auth.models import User, Permission, Group
+from django.contrib.auth.models import  Permission, Group
 from participant.forms import ParticipantFormMixin
 import re
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class RegistrationForm( ParticipantFormMixin ,forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}))

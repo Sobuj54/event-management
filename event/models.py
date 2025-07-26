@@ -1,7 +1,8 @@
 from django.db import models
 from category.models import Category
-from participant.models import Participant
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Event(models.Model):
     name = models.CharField(max_length=100)

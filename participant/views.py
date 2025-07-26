@@ -50,3 +50,7 @@ def participant_delete(request, pk):
         return redirect('participant:list')
 
     return render(request, 'participant-delete.html', {'participant': participant})
+
+
+
+

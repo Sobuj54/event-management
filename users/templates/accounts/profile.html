@@ -1,0 +1,94 @@
+
+{% extends 'main.html' %}
+
+{% block title %}Profile{% endblock  %}
+
+{% block content %}
+  <div class="bg-gray-100">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-white shadow-md">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-gray-800">Menu</h2>
+        </div>
+        <nav class="mt-6">
+          <a
+            href="#"
+            class="block px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300"
+            >Profile</a
+          >
+          <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+            >Edit Profile</a
+          >
+          <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+            >Change Password</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 p-8">
+        <h1 class="mb-8 text-3xl font-bold text-gray-800">User Profile</h1>
+
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="flex items-center mb-6">
+            {% if profile_image %}
+              <img
+              src="{{profile_image.url}}"
+              alt="User Avatar"
+              class="object-cover w-24 h-24 mr-6 rounded-full"
+            />
+            {% else %}
+            <div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z"/>
+              </svg>
+                <span class="sr-only">Loading...</span>
+            </div>
+            {% endif %}
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800">{{name}}</h2>
+              <p class="text-gray-600">Software Developer</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+              <h3 class="mb-2 text-lg font-semibold text-gray-700">
+                Personal Information
+              </h3>
+              <p class="text-gray-600">
+                <span class="font-medium">Email:</span> {{email}}
+              </p>
+              <p class="text-gray-600">
+                <span class="font-medium">Username:</span> {{username}}
+              </p>
+              <p class="text-gray-600">
+                <span class="font-medium">Location:</span> New York, USA
+              </p>
+            </div>
+            <div>
+              <h3 class="mb-2 text-lg font-semibold text-gray-700">
+                Account Information
+              </h3>
+              <p class="text-gray-600">
+                <span class="font-medium">Member Since:</span> {{member_since}}
+              </p>
+              <p class="text-gray-600">
+                <span class="font-medium">Last Login:</span> {{last_login}}
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="mb-2 text-lg font-semibold text-gray-700">Bio</h3>
+            <p class="text-gray-600">
+              {{bio}}
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+{% endblock  %}

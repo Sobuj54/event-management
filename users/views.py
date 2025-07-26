@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect, HttpResponse
 from users.forms import RegistrationForm, LoginForm, CreateGroupForm
 from django.contrib import messages
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import get_user_model
+from django.views.generic import TemplateView
+
+User = get_user_model()
 
 # Create your views here.
 
@@ -53,6 +57,23 @@ def activate_user(request, user_id, token):
 
     except User.DoesNotExist:
         return HttpResponse("User doesn't exists.")
+    
+
+
+class ProfileView(TemplateView):
+    template_name = "accounts/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        context["username"] = user.username
+        context["email"] = user.email
+        context["name"] = user.get_full_name()
+        context["member_since"] = user.date_joined
+        context["last_login"] = user.last_login
+
+        return context
     
 
 
